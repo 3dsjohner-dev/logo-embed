@@ -187,7 +187,6 @@
 
   async function drawLogo(){
     ctx.clearRect(0,0,W,H);
-    await sleep(1800); // start with a fully blank white page
     const targetSize = Math.min(W,H)*0.75;
     const raster = rasterizeImage(img, targetSize);
     const sk = thin(raster.mask, raster.w, raster.h);
@@ -213,10 +212,24 @@
     }
   }
 
+  // Synced to handwriting-hero word draw durations (measured at 1920x1080):
+  // "AI Influencer", "AI Werbung", "Ohne Fotoshooting", "48 Stunden"
+  const WORD_DRAW_MS = [10252, 10652, 14626, 9088];
+  const HERO_HOLD_MS = 1800;   // hero sleep(1800) after word
+  const HERO_ERASE_MS = 1033;  // hero erase animation
+  const HERO_PAUSE_MS = 400;   // hero sleep(400) after erase
+  const POST_LOGO_MS = HERO_HOLD_MS + HERO_ERASE_MS + HERO_PAUSE_MS;
+
   (async function loop(){
+    let i = 0;
     while(true){
+      ctx.clearRect(0,0,W,H);
+      await sleep(WORD_DRAW_MS[i % WORD_DRAW_MS.length]);
+      const t0 = performance.now();
       await drawLogo();
-      await sleep(1500);
+      const logoMs = performance.now() - t0;
+      await sleep(Math.max(0, POST_LOGO_MS - logoMs));
+      i++;
     }
   })();
 })().catch(err=>{
