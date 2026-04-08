@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Logo</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;background:#fff;overflow:hidden}
+  .hero{position:relative;width:100%;height:100vh;background:#fff}
+  canvas{display:block;width:100%;height:100%}
+</style>
+</head>
+<body>
+<div class="hero"><canvas id="c"></canvas></div>
+<script>
+(async function(){
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  let W=0,H=0,DPR=1;
+  function resize(){
+    DPR = Math.max(1, window.devicePixelRatio||1);
+    const r = canvas.getBoundingClientRect();
+    W = r.width  || window.innerWidth  || 800;
+    H = r.height || window.innerHeight || 600;
+    canvas.width = Math.floor(W*DPR);
+    canvas.height = Math.floor(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // ---- Load logo.png --------------------------------------------------------
+  const img = new Image();
+  img.src = 'data:image/png;base64,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';
+  await new Promise((res,rej)=>{
+    img.onload = ()=>res();
+    img.onerror = ()=>rej(new Error('logo.png not found'));
+  });
+
+  // ---- Rasterize image into a binary mask at target size -------------------
+  function rasterizeImage(image, targetSize){
+    const ratio = image.naturalWidth / image.naturalHeight;
+    let w,h;
+    if(ratio>=1){ w = targetSize; h = Math.round(targetSize/ratio); }
+    else       { h = targetSize; w = Math.round(targetSize*ratio); }
+    const pad = Math.ceil(targetSize*0.06);
+    const off = document.createElement('canvas');
+    off.width = w+pad*2; off.height = h+pad*2;
+    const octx = off.getContext('2d');
+    octx.drawImage(image, pad, pad, w, h);
+    const data = octx.getImageData(0,0,off.width,off.height).data;
+    const mask = new Uint8Array(off.width*off.height);
+    for(let i=0,j=0;i<data.length;i+=4,j++){
+      // consider pixel "ink" if not transparent and not near-white
+      const a = data[i+3];
+      const lum = (data[i]+data[i+1]+data[i+2])/3;
+      if(a>100 && lum<230) mask[j]=1;
+    }
+    return {mask, w:off.width, h:off.height};
+  }
+
+  // ---- Zhang-Suen thinning --------------------------------------------------
+  function thin(maskIn, w, h){
+    const mask = new Uint8Array(maskIn);
+    const get = (x,y)=> (x<0||y<0||x>=w||y>=h) ? 0 : mask[y*w+x];
+    let changed = true;
+    const toRemove = [];
+    while(changed){
+      changed = false;
+      for(let step=0;step<2;step++){
+        toRemove.length=0;
+        for(let y=1;y<h-1;y++){
+          for(let x=1;x<w-1;x++){
+            if(!mask[y*w+x]) continue;
+            const p2=get(x,y-1),p3=get(x+1,y-1),p4=get(x+1,y),p5=get(x+1,y+1),
+                  p6=get(x,y+1),p7=get(x-1,y+1),p8=get(x-1,y),p9=get(x-1,y-1);
+            const B = p2+p3+p4+p5+p6+p7+p8+p9;
+            if(B<2||B>6) continue;
+            const seq = [p2,p3,p4,p5,p6,p7,p8,p9,p2];
+            let A=0;
+            for(let i=0;i<8;i++) if(seq[i]===0 && seq[i+1]===1) A++;
+            if(A!==1) continue;
+            if(step===0){
+              if(p2*p4*p6!==0) continue;
+              if(p4*p6*p8!==0) continue;
+            } else {
+              if(p2*p4*p8!==0) continue;
+              if(p2*p6*p8!==0) continue;
+            }
+            toRemove.push(y*w+x);
+          }
+        }
+        if(toRemove.length){ changed=true; for(const idx of toRemove) mask[idx]=0; }
+      }
+    }
+    return mask;
+  }
+
+  // ---- Trace skeleton into ordered polylines --------------------------------
+  function tracePaths(skel, w, h){
+    const used = new Uint8Array(w*h);
+    const neighbors = (x,y)=>{
+      const out=[];
+      for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+        if(!dx&&!dy) continue;
+        const nx=x+dx, ny=y+dy;
+        if(nx<0||ny<0||nx>=w||ny>=h) continue;
+        const ni=ny*w+nx;
+        if(skel[ni] && !used[ni]) out.push([nx,ny,ni,Math.abs(dx)+Math.abs(dy)]);
+      }
+      out.sort((a,b)=>a[3]-b[3]);
+      return out;
+    };
+    const degree = (x,y)=>{
+      let c=0;
+      for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+        if(!dx&&!dy) continue;
+        const nx=x+dx,ny=y+dy;
+        if(nx<0||ny<0||nx>=w||ny>=h) continue;
+        if(skel[ny*w+nx]) c++;
+      }
+      return c;
+    };
+    const paths = [];
+    const walk = (sx,sy)=>{
+      const path=[];
+      let x=sx,y=sy;
+      used[y*w+x]=1;
+      path.push([x,y]);
+      while(true){
+        const nbs = neighbors(x,y);
+        if(!nbs.length) break;
+        const [nx,ny,ni] = nbs[0];
+        used[ni]=1;
+        path.push([nx,ny]);
+        x=nx; y=ny;
+      }
+      return path;
+    };
+    for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+      const i=y*w+x;
+      if(skel[i] && !used[i] && degree(x,y)===1){
+        paths.push(walk(x,y));
+      }
+    }
+    for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+      const i=y*w+x;
+      if(skel[i] && !used[i]) paths.push(walk(x,y));
+    }
+    return paths.filter(p=>p.length>=5);
+  }
+
+  function smooth(path, passes){
+    for(let p=0;p<passes;p++){
+      const out=[path[0]];
+      for(let i=1;i<path.length-1;i++){
+        out.push([(path[i-1][0]+path[i][0]*2+path[i+1][0])/4,
+                  (path[i-1][1]+path[i][1]*2+path[i+1][1])/4]);
+      }
+      out.push(path[path.length-1]);
+      path=out;
+    }
+    return path;
+  }
+
+  // ---- Marker segment drawer (matches brand orange) -------------------------
+  function drawSegment(a, b, offX, offY){
+    const dx=b[0]-a[0], dy=b[1]-a[1];
+    const dist=Math.hypot(dx,dy);
+    const speed=Math.min(1, dist/2.2);
+    let lw = 22 - speed*5;
+    if(lw<15) lw=15;
+    ctx.lineWidth = lw;
+    ctx.strokeStyle = '#ff7a18';
+    ctx.lineCap='round'; ctx.lineJoin='round';
+    const jx=(Math.random()-0.5)*0.4;
+    const jy=(Math.random()-0.5)*0.4;
+    ctx.beginPath();
+    ctx.moveTo(offX+a[0], offY+a[1]);
+    const mx=(a[0]+b[0])/2+jx, my=(a[1]+b[1])/2+jy;
+    ctx.quadraticCurveTo(offX+mx, offY+my, offX+b[0], offY+b[1]);
+    ctx.stroke();
+  }
+
+  const frame = ()=>new Promise(r=>requestAnimationFrame(()=>r()));
+  const sleep = ms=>new Promise(r=>setTimeout(r,ms));
+
+  async function drawLogo(){
+    ctx.clearRect(0,0,W,H);
+    await sleep(800); // start with a fully blank white page
+    const targetSize = Math.min(W,H)*0.75;
+    const raster = rasterizeImage(img, targetSize);
+    const sk = thin(raster.mask, raster.w, raster.h);
+    let paths = tracePaths(sk, raster.w, raster.h);
+    paths = paths.map(p=>smooth(p,2));
+    // draw longest paths first so small artifacts don't start the show
+    paths.sort((a,b)=>b.length-a.length);
+
+    const offX = (W - raster.w)/2;
+    const offY = (H - raster.h)/2;
+    const POINTS_PER_FRAME = 3;
+    for(const path of paths){
+      let i=1;
+      while(i<path.length){
+        const end=Math.min(path.length, i+POINTS_PER_FRAME);
+        for(let k=i;k<end;k++){
+          drawSegment(path[k-1], path[k], offX, offY);
+        }
+        i=end;
+        await frame();
+      }
+      await sleep(40);
+    }
+  }
+
+  drawLogo();
+})().catch(err=>{
+  const ctx = document.getElementById('c').getContext('2d');
+  ctx.fillStyle = '#c00';
+  ctx.font = '20px sans-serif';
+  ctx.fillText('Fehler: '+err.message+' — bitte logo.png in diesen Ordner legen', 20, 40);
+});
+</script>
+</body>
+</html>
