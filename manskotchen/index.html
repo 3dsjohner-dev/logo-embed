@@ -8,48 +8,229 @@
   .stage{width:min(80vmin,560px);aspect-ratio:1/1;position:relative}
   svg{width:100%;height:100%;display:block;overflow:visible}
 
-  .walker{transform-origin:750px 750px;animation:walk 10s ease-in-out infinite}
-  @keyframes walk{
-    0%  {transform:translateX(-15%) scaleX(1)  rotate(-3deg)}
-    45% {transform:translateX( 15%) scaleX(1)  rotate( 3deg)}
-    50% {transform:translateX( 15%) scaleX(-1) rotate(-3deg)}
-    95% {transform:translateX(-15%) scaleX(-1) rotate( 3deg)}
-    100%{transform:translateX(-15%) scaleX(1)  rotate(-3deg)}
+  /* ============ HAUPTSEQUENZ (16s Loop, 8 Akte á 2s) ============
+     0-2s   walk-right   : laufen nach rechts
+     2-4s   big-jump     : großer Sprung mit Sterne
+     4-6s   wave         : winkt fröhlich
+     6-8s   spin         : 360° Pirouette
+     8-10s  walk-left    : laufen nach links
+     10-12s peek         : guckt verschmitzt nach oben
+     12-14s dance        : tanzt (Schultern + Hüfte)
+     14-16s laugh-bounce : lacht und hüpft auf der Stelle
+  ============================================================ */
+
+  .walker{transform-origin:750px 800px;animation:walker 16s ease-in-out infinite}
+  @keyframes walker{
+    0%   {transform:translate(-15%,0)   scaleX(1)  rotate(-2deg)}
+    12%  {transform:translate( 15%,0)   scaleX(1)  rotate( 2deg)}
+    /* big jump */
+    16%  {transform:translate( 15%,0)   scaleX(1)  rotate(0deg)}
+    22%  {transform:translate( 18%,-90px) scaleX(1) rotate(8deg)}
+    25%  {transform:translate( 15%,0)   scaleX(1)  rotate(0deg)}
+    /* wave (steht) */
+    37%  {transform:translate( 15%,0)   scaleX(1)  rotate(0deg)}
+    /* spin */
+    44%  {transform:translate( 0%,-30px) scaleX(1) rotate(180deg)}
+    50%  {transform:translate(-15%,0)   scaleX(1)  rotate(360deg)}
+    /* walk-left */
+    52%  {transform:translate(-15%,0)   scaleX(-1) rotate(0deg)}
+    62%  {transform:translate( -2%,0)   scaleX(-1) rotate(-3deg)}
+    /* peek */
+    66%  {transform:translate( -2%,0)   scaleX(-1) rotate(0deg)}
+    75%  {transform:translate(  0%,0)   scaleX(1)  rotate(0deg)}
+    /* dance */
+    81%  {transform:translate( -6%,-10px) scaleX(1) rotate(-6deg)}
+    87%  {transform:translate(  6%,-10px) scaleX(1) rotate( 6deg)}
+    /* laugh-bounce */
+    91%  {transform:translate( 0%,-25px) scaleX(1) rotate(0deg)}
+    95%  {transform:translate( 0%,0)    scaleX(1)  rotate(0deg)}
+    100% {transform:translate(-15%,0)   scaleX(1)  rotate(-2deg)}
   }
-  .hop{transform-origin:750px 750px;animation:hop .9s cubic-bezier(.5,0,.5,1) infinite}
+
+  /* schneller Hop läuft nur in den "Geh"-Phasen sichtbar mit */
+  .hop{transform-origin:750px 800px;animation:hop 16s linear infinite}
   @keyframes hop{
-    0%,100%{transform:translateY(0)}
-    40%    {transform:translateY(-50px)}
-    80%    {transform:translateY(0)}
-    90%    {transform:translateY(-4px)}
+    0%,12%   {transform:translateY(0)}
+    3%       {transform:translateY(-22px)}
+    6%       {transform:translateY(0)}
+    9%       {transform:translateY(-22px)}
+    12%,52%  {transform:translateY(0)}
+    55%      {transform:translateY(-18px)}
+    58%      {transform:translateY(0)}
+    61%      {transform:translateY(-18px)}
+    64%,100% {transform:translateY(0)}
   }
-  .sway{transform-origin:750px 700px;animation:sway 1.6s ease-in-out infinite}
-  @keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
-  .body{transform-origin:750px 800px;animation:squish .9s ease-in-out infinite}
-  @keyframes squish{
-    0%,100%{transform:scale(1,1)}
-    40%    {transform:scale(.96,1.04)}
-    80%    {transform:scale(1.06,.94)}
+
+  .sway{transform-origin:750px 750px;animation:sway 16s ease-in-out infinite}
+  @keyframes sway{
+    0%,100%{transform:rotate(-4deg)}
+    25%    {transform:rotate(4deg)}
+    50%    {transform:rotate(-4deg)}
+    75%    {transform:rotate(4deg)}
   }
-  .armL{transform-origin:430px 720px;animation:armL .9s ease-in-out infinite}
-  .armR{transform-origin:1070px 720px;animation:armR .9s ease-in-out infinite}
-  @keyframes armL{0%,100%{transform:rotate(-25deg)}50%{transform:rotate(35deg)}}
-  @keyframes armR{0%,100%{transform:rotate(25deg)}50%{transform:rotate(-35deg)}}
-  .legL{transform-origin:600px 1010px;animation:legL .9s ease-in-out infinite}
-  .legR{transform-origin:870px 1010px;animation:legR .9s ease-in-out infinite}
-  @keyframes legL{0%,100%{transform:rotate(20deg)}50%{transform:rotate(-20deg)}}
-  @keyframes legR{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(20deg)}}
-  .pupilL,.pupilR{animation:look 3.2s ease-in-out infinite}
+
+  .body{transform-origin:750px 1000px;animation:squish 0.6s ease-in-out infinite}
+  @keyframes squish{0%,100%{transform:scale(1,1)}50%{transform:scale(1.05,.95)}}
+
+  /* ----- ARME ----- */
+  .armL{transform-origin:430px 760px;animation:armL 16s ease-in-out infinite}
+  .armR{transform-origin:1070px 760px;animation:armR 16s ease-in-out infinite}
+  /* linker Arm: läuft, schwingt, winkt nicht, tanzt, lacht */
+  @keyframes armL{
+    0%   {transform:rotate(-25deg)}
+    6%   {transform:rotate(35deg)}
+    12%  {transform:rotate(-25deg)}
+    /* jump – beide Arme hoch */
+    20%  {transform:rotate(-160deg)}
+    25%  {transform:rotate(-25deg)}
+    /* wave – linker Arm normal unten */
+    37%  {transform:rotate(-15deg)}
+    /* spin */
+    50%  {transform:rotate(-25deg)}
+    /* walk-left */
+    55%  {transform:rotate(35deg)}
+    61%  {transform:rotate(-25deg)}
+    /* peek – Hand am Kinn */
+    70%  {transform:rotate(-90deg)}
+    75%  {transform:rotate(-90deg)}
+    /* dance */
+    81%  {transform:rotate(-120deg)}
+    87%  {transform:rotate(45deg)}
+    /* laugh */
+    93%  {transform:rotate(-140deg)}
+    100% {transform:rotate(-25deg)}
+  }
+  /* rechter Arm: läuft, beim Sprung hoch, WINKT in 4-6s, tanzt, lacht */
+  @keyframes armR{
+    0%   {transform:rotate(25deg)}
+    6%   {transform:rotate(-35deg)}
+    12%  {transform:rotate(25deg)}
+    /* jump – Arme hoch */
+    20%  {transform:rotate(160deg)}
+    25%  {transform:rotate(25deg)}
+    /* WAVE: 4-6s = 25%-37% */
+    27%  {transform:rotate(-150deg)}
+    29%  {transform:rotate(-110deg)}
+    31%  {transform:rotate(-150deg)}
+    33%  {transform:rotate(-110deg)}
+    35%  {transform:rotate(-150deg)}
+    37%  {transform:rotate(25deg)}
+    /* spin */
+    50%  {transform:rotate(25deg)}
+    /* walk-left */
+    55%  {transform:rotate(-35deg)}
+    61%  {transform:rotate(25deg)}
+    /* peek */
+    70%  {transform:rotate(40deg)}
+    75%  {transform:rotate(40deg)}
+    /* dance */
+    81%  {transform:rotate(-45deg)}
+    87%  {transform:rotate(120deg)}
+    /* laugh */
+    93%  {transform:rotate(140deg)}
+    100% {transform:rotate(25deg)}
+  }
+
+  /* ----- BEINE ----- */
+  .legL{transform-origin:600px 1010px;animation:legL 16s ease-in-out infinite}
+  .legR{transform-origin:870px 1010px;animation:legR 16s ease-in-out infinite}
+  @keyframes legL{
+    0%   {transform:rotate(20deg)}
+    6%   {transform:rotate(-20deg)}
+    12%  {transform:rotate(20deg)}
+    20%  {transform:rotate(-30deg)}
+    25%  {transform:rotate(0deg)}
+    37%  {transform:rotate(0deg)}
+    50%  {transform:rotate(0deg)}
+    55%  {transform:rotate(-20deg)}
+    61%  {transform:rotate(20deg)}
+    70%  {transform:rotate(0deg)}
+    81%  {transform:rotate(25deg)}
+    87%  {transform:rotate(-25deg)}
+    93%  {transform:rotate(15deg)}
+    100% {transform:rotate(20deg)}
+  }
+  @keyframes legR{
+    0%   {transform:rotate(-20deg)}
+    6%   {transform:rotate(20deg)}
+    12%  {transform:rotate(-20deg)}
+    20%  {transform:rotate(30deg)}
+    25%  {transform:rotate(0deg)}
+    37%  {transform:rotate(0deg)}
+    50%  {transform:rotate(0deg)}
+    55%  {transform:rotate(20deg)}
+    61%  {transform:rotate(-20deg)}
+    70%  {transform:rotate(0deg)}
+    81%  {transform:rotate(-25deg)}
+    87%  {transform:rotate(25deg)}
+    93%  {transform:rotate(-15deg)}
+    100% {transform:rotate(-20deg)}
+  }
+
+  /* ----- AUGEN ----- */
+  .pupilL,.pupilR{animation:look 16s ease-in-out infinite}
   @keyframes look{
-    0%,18%  {transform:translate(0,0)}
-    28%,44% {transform:translate(14px,-6px)}
-    54%,70% {transform:translate(-14px,3px)}
-    80%,100%{transform:translate(0,0)}
+    0%,5%   {transform:translate(8px,0)}
+    8%,11%  {transform:translate(14px,-2px)}
+    14%,18% {transform:translate(0,0)}
+    /* jump – nach oben gucken */
+    20%,24% {transform:translate(0,-12px)}
+    /* wave – schaut zum Betrachter, zwinkernd */
+    28%,36% {transform:translate(0,2px)}
+    /* spin – wirbelig */
+    42%,48% {transform:translate(-15px,4px)}
+    /* walk-left */
+    54%,62% {transform:translate(-12px,0)}
+    /* peek – nach oben, dann zur Seite */
+    66%,70% {transform:translate(2px,-14px)}
+    72%,76% {transform:translate(-12px,-8px)}
+    /* dance */
+    80%    {transform:translate(-10px,4px)}
+    86%    {transform:translate(10px,4px)}
+    /* laugh – zu */
+    92%,96% {transform:translate(0,0)}
+    100%   {transform:translate(8px,0)}
   }
-  .lid{transform-origin:center;transform:scaleY(0);animation:blink 5s ease-in-out infinite}
-  @keyframes blink{
-    0%,93%,100%{transform:scaleY(0)}
-    96%,98%    {transform:scaleY(1)}
+
+  /* Lider blinzeln / lachen */
+  .lid{transform-origin:center;transform:scaleY(0);animation:lid 16s ease-in-out infinite}
+  @keyframes lid{
+    0%,26%       {transform:scaleY(0)}
+    /* Wink während wave: linkes Auge zu */
+    27%,29%      {transform:scaleY(0)}
+    /* Blinzler */
+    40%,40.5%    {transform:scaleY(0)}
+    41%,42%      {transform:scaleY(1)}
+    42.5%,89%    {transform:scaleY(0)}
+    /* lachen 14-16s = 87.5-100%: Augen zugekniffen */
+    90%,99%      {transform:scaleY(1)}
+    100%         {transform:scaleY(0)}
+  }
+  /* zusätzlicher Wink nur für linkes Lid in der wave-Phase */
+  .lidL{animation:lidWink 16s ease-in-out infinite}
+  @keyframes lidWink{
+    0%,27%       {transform:scaleY(0)}
+    28%,30%      {transform:scaleY(1)}
+    31%,89%      {transform:scaleY(0)}
+    90%,99%      {transform:scaleY(1)}
+    100%         {transform:scaleY(0)}
+  }
+
+  /* Mund / Lach-Linie */
+  .mouth{animation:mouth 16s ease-in-out infinite;transform-origin:755px 880px}
+  @keyframes mouth{
+    0%,86%  {transform:scaleY(1) translateY(0)}
+    90%,98% {transform:scaleY(2.2) translateY(-4px)}
+    100%    {transform:scaleY(1) translateY(0)}
+  }
+
+  /* Sterne beim Sprung */
+  .sparkles{opacity:0;animation:spark 16s ease-out infinite}
+  @keyframes spark{
+    0%,18%  {opacity:0;transform:translateY(0) scale(.5)}
+    20%     {opacity:1;transform:translateY(-10px) scale(1)}
+    24%     {opacity:0;transform:translateY(-40px) scale(1.4)}
+    100%    {opacity:0}
   }
 </style>
 </head>
@@ -58,19 +239,30 @@
 <svg viewBox="0 0 1500 1500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
   <defs>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feGaussianBlur stdDeviation="4" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
+
+  <!-- Sterne (Sprung-Effekt) -->
+  <g class="sparkles">
+    <path d="M 350 600 l 8 -22 l 8 22 l 22 8 l -22 8 l -8 22 l -8 -22 l -22 -8 z" fill="#ff7a1a"/>
+    <path d="M 1180 580 l 7 -18 l 7 18 l 18 7 l -18 7 l -7 18 l -7 -18 l -18 -7 z" fill="#ffb060"/>
+    <path d="M 1250 850 l 6 -16 l 6 16 l 16 6 l -16 6 l -6 16 l -6 -16 l -16 -6 z" fill="#ff7a1a"/>
+    <path d="M 280 880 l 6 -16 l 6 16 l 16 6 l -16 6 l -6 16 l -6 -16 l -16 -6 z" fill="#ffb060"/>
+  </g>
+
   <g class="walker"><g class="hop"><g class="sway"><g class="body" filter="url(#glow)">
+    <!-- Arme -->
     <g class="armL">
-      <path d="M430 720 C 340 740, 260 760, 190 745" stroke="#1a1a1a" stroke-width="22" stroke-linecap="round" fill="none"/>
-      <circle cx="186" cy="748" r="18" fill="#1a1a1a"/>
+      <path d="M430 760 C 340 780, 260 800, 190 785" stroke="#1a1a1a" stroke-width="22" stroke-linecap="round" fill="none"/>
+      <circle cx="186" cy="788" r="20" fill="#1a1a1a"/>
     </g>
     <g class="armR">
-      <path d="M1070 720 C 1160 740, 1240 760, 1310 745" stroke="#1a1a1a" stroke-width="22" stroke-linecap="round" fill="none"/>
-      <circle cx="1314" cy="748" r="18" fill="#1a1a1a"/>
+      <path d="M1070 760 C 1160 780, 1240 800, 1310 785" stroke="#1a1a1a" stroke-width="22" stroke-linecap="round" fill="none"/>
+      <circle cx="1314" cy="788" r="20" fill="#1a1a1a"/>
     </g>
+    <!-- Beine -->
     <g class="legL">
       <line x1="600" y1="1010" x2="575" y2="1170" stroke="#1a1a1a" stroke-width="20" stroke-linecap="round"/>
       <ellipse cx="568" cy="1185" rx="34" ry="14" fill="#1a1a1a"/>
@@ -79,24 +271,32 @@
       <line x1="870" y1="1010" x2="895" y2="1170" stroke="#1a1a1a" stroke-width="20" stroke-linecap="round"/>
       <ellipse cx="902" cy="1185" rx="34" ry="14" fill="#1a1a1a"/>
     </g>
+
+    <!-- Stern-Körper -->
     <path d="M 750 320 C 810 470, 910 520, 1130 460 C 1070 590, 1110 710, 1190 830 C 1030 830, 930 925, 905 1140 C 810 1045, 690 1070, 570 1185 C 595 1015, 520 895, 340 870 C 495 800, 545 680, 495 500 C 625 555, 695 510, 750 320 Z"
       fill="none" stroke="#ff7a1a" stroke-width="42" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <!-- Augen -->
     <g>
-      <circle cx="660" cy="700" r="78" fill="#1a1a1a"/>
-      <circle cx="850" cy="705" r="72" fill="#1a1a1a"/>
+      <circle cx="660" cy="700" r="80" fill="#1a1a1a"/>
+      <circle cx="850" cy="705" r="74" fill="#1a1a1a"/>
       <g class="pupilL">
-        <circle cx="672" cy="710" r="34" fill="#fff"/>
-        <circle cx="676" cy="713" r="16" fill="#000"/>
-        <circle cx="666" cy="700" r="6" fill="#fff"/>
+        <circle cx="660" cy="710" r="38" fill="#fff"/>
+        <circle cx="664" cy="713" r="18" fill="#000"/>
+        <circle cx="652" cy="700" r="7" fill="#fff"/>
       </g>
       <g class="pupilR">
-        <circle cx="862" cy="715" r="32" fill="#fff"/>
-        <circle cx="866" cy="718" r="15" fill="#000"/>
-        <circle cx="857" cy="705" r="6" fill="#fff"/>
+        <circle cx="850" cy="715" r="36" fill="#fff"/>
+        <circle cx="854" cy="718" r="17" fill="#000"/>
+        <circle cx="843" cy="705" r="7" fill="#fff"/>
       </g>
-      <ellipse class="lid" cx="660" cy="700" rx="82" ry="82" fill="#000"/>
-      <ellipse class="lid" cx="850" cy="705" rx="76" ry="76" fill="#000"/>
+      <ellipse class="lid lidL" cx="660" cy="700" rx="84" ry="84" fill="#000"/>
+      <ellipse class="lid"      cx="850" cy="705" rx="78" ry="78" fill="#000"/>
     </g>
+
+    <!-- Mund (kleine lächelnde Linie, lacht in Phase 8) -->
+    <path class="mouth" d="M 700 870 Q 755 905 810 870" stroke="#1a1a1a" stroke-width="14" fill="none" stroke-linecap="round"/>
+
   </g></g></g></g>
 </svg>
 </div>
