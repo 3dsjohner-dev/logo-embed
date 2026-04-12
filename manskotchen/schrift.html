@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:transparent;display:flex;align-items:center;justify-content:center;overflow:hidden}
+
+  .text-wrap{position:relative;white-space:nowrap}
+
+  .line{
+    font-family:'Permanent Marker',cursive;
+    font-size:clamp(28px,5vw,56px);
+    color:#000;
+    display:inline-block;
+    position:relative;
+    overflow:hidden;
+    vertical-align:bottom;
+    margin-right:.3em;
+  }
+  .line:last-child{margin-right:0}
+
+  .line span{
+    display:inline-block;
+    transform:translateY(100%) rotate(2deg);
+    opacity:0;
+  }
+
+  /* Wort 1: "Mache" */
+  .w1 span{animation:writeIn .35s cubic-bezier(.22,.68,.36,1) forwards}
+  .w1 .c1{animation-delay:.1s}
+  .w1 .c2{animation-delay:.14s}
+  .w1 .c3{animation-delay:.18s}
+  .w1 .c4{animation-delay:.22s}
+  .w1 .c5{animation-delay:.26s}
+
+  /* Wort 2: "dein" */
+  .w2 span{animation:writeIn .35s cubic-bezier(.22,.68,.36,1) forwards}
+  .w2 .c1{animation-delay:.45s}
+  .w2 .c2{animation-delay:.49s}
+  .w2 .c3{animation-delay:.53s}
+  .w2 .c4{animation-delay:.57s}
+
+  /* Wort 3: "Marketing" */
+  .w3 span{animation:writeIn .35s cubic-bezier(.22,.68,.36,1) forwards}
+  .w3 .c1{animation-delay:.72s}
+  .w3 .c2{animation-delay:.76s}
+  .w3 .c3{animation-delay:.80s}
+  .w3 .c4{animation-delay:.84s}
+  .w3 .c5{animation-delay:.88s}
+  .w3 .c6{animation-delay:.92s}
+  .w3 .c7{animation-delay:.96s}
+  .w3 .c8{animation-delay:1.0s}
+  .w3 .c9{animation-delay:1.04s}
+
+  /* Wort 4: "mit" */
+  .w4 span{animation:writeIn .35s cubic-bezier(.22,.68,.36,1) forwards}
+  .w4 .c1{animation-delay:1.25s}
+  .w4 .c2{animation-delay:1.29s}
+  .w4 .c3{animation-delay:1.33s}
+
+  /* Wort 5: "AI" - etwas dramatischer */
+  .w5 span{animation:writeInBold .5s cubic-bezier(.22,.68,.36,1) forwards}
+  .w5 .c1{animation-delay:1.55s}
+  .w5 .c2{animation-delay:1.65s}
+
+  @keyframes writeIn{
+    0%  {transform:translateY(80%) rotate(3deg) scale(.7);opacity:0}
+    60% {transform:translateY(-8%) rotate(-1deg) scale(1.05);opacity:1}
+    100%{transform:translateY(0) rotate(0) scale(1);opacity:1}
+  }
+
+  @keyframes writeInBold{
+    0%  {transform:translateY(80%) rotate(5deg) scale(.5);opacity:0}
+    50% {transform:translateY(-12%) rotate(-2deg) scale(1.15);opacity:1}
+    75% {transform:translateY(4%) rotate(1deg) scale(1.05);opacity:1}
+    100%{transform:translateY(0) rotate(0) scale(1);opacity:1}
+  }
+
+  /* Unterstrich unter "AI" */
+  .underline{
+    position:absolute;
+    bottom:-4px;
+    left:0;
+    width:100%;
+    height:4px;
+    background:#000;
+    border-radius:2px;
+    transform:scaleX(0);
+    transform-origin:left;
+    animation:drawLine .3s cubic-bezier(.4,0,.2,1) 1.9s forwards;
+  }
+
+  @keyframes drawLine{
+    to{transform:scaleX(1)}
+  }
+
+  /* Cursor/Stift-Effekt */
+  .cursor{
+    display:inline-block;
+    width:3px;
+    height:1.1em;
+    background:#000;
+    margin-left:4px;
+    vertical-align:text-bottom;
+    animation:blink .5s step-end 0s 4, fadeOut .3s 2.2s forwards;
+  }
+  @keyframes blink{
+    50%{opacity:0}
+  }
+  @keyframes fadeOut{
+    to{opacity:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="text-wrap">
+  <span class="line w1"><span class="c1">M</span><span class="c2">a</span><span class="c3">c</span><span class="c4">h</span><span class="c5">e</span></span>
+  <span class="line w2"><span class="c1">d</span><span class="c2">e</span><span class="c3">i</span><span class="c4">n</span></span>
+  <span class="line w3"><span class="c1">M</span><span class="c2">a</span><span class="c3">r</span><span class="c4">k</span><span class="c5">e</span><span class="c6">t</span><span class="c7">i</span><span class="c8">n</span><span class="c9">g</span></span>
+  <span class="line w4"><span class="c1">m</span><span class="c2">i</span><span class="c3">t</span></span>
+  <span class="line w5" style="position:relative"><span class="c1">A</span><span class="c2">I</span><div class="underline"></div></span>
+  <span class="cursor"></span>
+</div>
+
+</body>
+</html>
