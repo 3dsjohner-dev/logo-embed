@@ -7,100 +7,109 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{height:100%;background:transparent;display:flex;align-items:center;justify-content:center}
   svg{width:90vw;max-width:950px;height:auto}
-  .s{fill:none;stroke:#000;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;opacity:0}
-  .dot{fill:none;stroke:#000;stroke-width:8;stroke-linecap:round;opacity:0}
+  .s{fill:none;stroke:#1a1a1a;stroke-width:7.5;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+  .dot{fill:none;stroke:#1a1a1a;stroke-width:9;stroke-linecap:round;opacity:0}
   #pen{fill:#000;opacity:0}
 </style>
 </head>
 <body>
 
-<svg viewBox="0 0 762 92" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 762 96" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="turbulence" baseFrequency="0.035" numOctaves="4" seed="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#wobble)">
 
   <!-- ===== Mache ===== -->
   <!-- M -->
-  <path class="s" d="M 15,65 L 19,18 L 35,50 L 51,18 L 55,65"/>
+  <path class="s" d="M 15,66 L 18,19 L 35,51 L 52,17 L 55,64"/>
   <!-- a -->
-  <path class="s" d="M 82,38 C 82,28 60,28 60,50 C 60,66 82,66 82,48 L 82,65"/>
+  <path class="s" d="M 82,39 C 83,27 59,29 60,51 C 59,67 83,65 82,47 L 83,66"/>
   <!-- c -->
-  <path class="s" d="M 109,38 C 101,28 89,34 89,50 C 89,64 99,70 109,64"/>
+  <path class="s" d="M 110,37 C 102,27 88,35 89,51 C 88,65 100,71 110,63"/>
   <!-- h stroke1: stem -->
-  <path class="s" d="M 114,18 L 114,65"/>
+  <path class="s" d="M 115,17 L 114,66"/>
   <!-- h stroke2: arch -->
-  <path class="s" d="M 114,42 C 120,34 132,34 138,42 L 138,65"/>
+  <path class="s" d="M 114,43 C 121,33 131,35 139,43 L 138,66"/>
   <!-- e -->
-  <path class="s" d="M 143,50 L 163,50 C 165,34 143,30 143,50 C 143,66 157,70 165,62"/>
+  <path class="s" d="M 144,51 L 164,49 C 166,33 142,31 143,51 C 144,67 158,71 166,61"/>
 
   <!-- ===== dein ===== word pause -->
   <!-- d stroke1: bowl -->
-  <path class="s wp" d="M 222,42 C 218,30 200,30 200,50 C 200,66 216,68 222,52"/>
+  <path class="s wp" d="M 223,43 C 219,29 199,31 200,51 C 199,67 217,69 223,53"/>
   <!-- d stroke2: stem -->
-  <path class="s" d="M 222,18 L 222,65"/>
+  <path class="s" d="M 223,17 L 222,66"/>
   <!-- e -->
-  <path class="s" d="M 229,50 L 249,50 C 251,34 229,30 229,50 C 229,66 243,70 251,62"/>
+  <path class="s" d="M 230,51 L 250,49 C 252,33 228,31 229,51 C 230,67 244,71 252,61"/>
   <!-- i stem -->
-  <path class="s" d="M 259,36 L 259,65"/>
+  <path class="s" d="M 260,37 L 259,66"/>
   <!-- i dot -->
-  <path class="dot" d="M 259,24 L 259,25"/>
+  <path class="dot" d="M 259,23 L 260,25"/>
   <!-- n stroke1: stem -->
-  <path class="s" d="M 267,36 L 267,65"/>
+  <path class="s" d="M 268,37 L 267,66"/>
   <!-- n stroke2: arch -->
-  <path class="s" d="M 267,42 C 273,32 285,32 291,42 L 291,65"/>
+  <path class="s" d="M 267,43 C 274,31 286,33 292,43 L 291,66"/>
 
   <!-- ===== Marketing ===== word pause -->
   <!-- M -->
-  <path class="s wp" d="M 326,65 L 330,18 L 346,50 L 362,18 L 366,65"/>
+  <path class="s wp" d="M 326,66 L 329,19 L 347,51 L 363,17 L 367,64"/>
   <!-- a -->
-  <path class="s" d="M 393,38 C 393,28 371,28 371,50 C 371,66 393,66 393,48 L 393,65"/>
+  <path class="s" d="M 394,39 C 394,27 370,29 371,51 C 370,67 394,65 393,47 L 394,66"/>
   <!-- r stroke1: stem -->
-  <path class="s" d="M 400,36 L 400,65"/>
+  <path class="s" d="M 401,37 L 400,66"/>
   <!-- r stroke2: hook -->
-  <path class="s" d="M 400,44 C 404,34 414,34 416,40"/>
+  <path class="s" d="M 400,45 C 405,33 415,35 417,41"/>
   <!-- k stroke1: stem -->
-  <path class="s" d="M 421,18 L 421,65"/>
+  <path class="s" d="M 422,17 L 421,66"/>
   <!-- k stroke2: diagonals -->
-  <path class="s" d="M 443,36 L 421,52 L 443,65"/>
+  <path class="s" d="M 444,37 L 421,53 L 444,64"/>
   <!-- e -->
-  <path class="s" d="M 448,50 L 468,50 C 470,34 448,30 448,50 C 448,66 462,70 470,62"/>
+  <path class="s" d="M 449,51 L 469,49 C 471,33 447,31 448,51 C 449,67 463,71 471,61"/>
   <!-- t stroke1: stem -->
-  <path class="s" d="M 483,22 L 483,65"/>
+  <path class="s" d="M 484,21 L 483,66"/>
   <!-- t stroke2: cross -->
-  <path class="s" d="M 475,36 L 491,36"/>
+  <path class="s" d="M 474,37 L 492,35"/>
   <!-- i stem -->
-  <path class="s" d="M 499,36 L 499,65"/>
+  <path class="s" d="M 500,37 L 499,66"/>
   <!-- i dot -->
-  <path class="dot" d="M 499,24 L 499,25"/>
+  <path class="dot" d="M 499,23 L 500,25"/>
   <!-- n stroke1: stem -->
-  <path class="s" d="M 507,36 L 507,65"/>
+  <path class="s" d="M 508,37 L 507,66"/>
   <!-- n stroke2: arch -->
-  <path class="s" d="M 507,42 C 513,32 525,32 531,42 L 531,65"/>
+  <path class="s" d="M 507,43 C 514,31 526,33 532,43 L 531,66"/>
   <!-- g stroke1: bowl -->
-  <path class="s" d="M 558,40 C 558,28 536,28 536,50 C 536,66 558,66 558,48"/>
+  <path class="s" d="M 559,41 C 559,27 535,29 536,51 C 535,67 559,65 558,47"/>
   <!-- g stroke2: descender -->
-  <path class="s" d="M 558,36 L 558,82 C 558,88 540,86 536,80"/>
+  <path class="s" d="M 559,37 L 558,83 C 559,89 539,87 536,81"/>
 
   <!-- ===== mit ===== word pause -->
   <!-- m stroke1: stem -->
-  <path class="s wp" d="M 595,36 L 595,65"/>
+  <path class="s wp" d="M 596,37 L 595,66"/>
   <!-- m stroke2: arch1 -->
-  <path class="s" d="M 595,42 C 600,32 609,32 614,42 L 614,65"/>
+  <path class="s" d="M 595,43 C 601,31 610,33 615,43 L 614,66"/>
   <!-- m stroke3: arch2 -->
-  <path class="s" d="M 614,42 C 619,32 628,32 633,42 L 633,65"/>
+  <path class="s" d="M 614,43 C 620,31 629,33 634,43 L 633,66"/>
   <!-- i stem -->
-  <path class="s" d="M 641,36 L 641,65"/>
+  <path class="s" d="M 642,37 L 641,66"/>
   <!-- i dot -->
-  <path class="dot" d="M 641,24 L 641,25"/>
+  <path class="dot" d="M 641,23 L 642,25"/>
   <!-- t stroke1: stem -->
-  <path class="s" d="M 657,22 L 657,65"/>
+  <path class="s" d="M 658,21 L 657,66"/>
   <!-- t stroke2: cross -->
-  <path class="s" d="M 649,36 L 665,36"/>
+  <path class="s" d="M 648,37 L 666,35"/>
 
   <!-- ===== AI ===== word pause -->
   <!-- A stroke1: legs -->
-  <path class="s wp" d="M 700,65 L 718,18 L 736,65"/>
+  <path class="s wp" d="M 700,66 L 719,17 L 737,64"/>
   <!-- A stroke2: crossbar -->
-  <path class="s" d="M 708,46 L 728,46"/>
+  <path class="s" d="M 709,47 L 729,45"/>
   <!-- I -->
-  <path class="s" d="M 744,18 L 744,65"/>
+  <path class="s" d="M 745,17 L 744,66"/>
+
+  </g><!-- close wobble filter group -->
 
   <!-- Pen cursor -->
   <circle id="pen" r="4"/>
