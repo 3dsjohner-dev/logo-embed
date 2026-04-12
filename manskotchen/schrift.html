@@ -3,133 +3,185 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%;background:transparent;display:flex;align-items:center;justify-content:center;overflow:visible}
-  svg{width:90vw;height:auto}
+  html,body{height:100%;background:transparent;display:flex;align-items:center;justify-content:center}
+  svg{width:90vw;max-width:950px;height:auto}
+  .s{fill:none;stroke:#000;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+  .dot{fill:none;stroke:#000;stroke-width:8;stroke-linecap:round;opacity:0}
+  #pen{fill:#000;opacity:0}
 </style>
 </head>
 <body>
 
-<svg id="hw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 120" width="1000" height="120">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-    .word{
-      font-family:'Permanent Marker',cursive;
-      font-size:62px;
-      fill:none;
-      stroke:#000;
-      stroke-width:2.5;
-      stroke-linecap:round;
-      stroke-linejoin:round;
-    }
-    .word-fill{
-      font-family:'Permanent Marker',cursive;
-      font-size:62px;
-      fill:#000;
-      opacity:0;
-    }
-  </style>
-  <!-- Stroke layer (gets drawn) -->
-  <text class="word" id="t1" x="10" y="78">Mache</text>
-  <text class="word" id="t2" x="265" y="78">dein</text>
-  <text class="word" id="t3" x="430" y="78">Marketing</text>
-  <text class="word" id="t4" x="780" y="78">mit</text>
-  <text class="word" id="t5" x="880" y="78">AI</text>
-  <!-- Fill layer (fades in after stroke) -->
-  <text class="word-fill" id="f1" x="10" y="78">Mache</text>
-  <text class="word-fill" id="f2" x="265" y="78">dein</text>
-  <text class="word-fill" id="f3" x="430" y="78">Marketing</text>
-  <text class="word-fill" id="f4" x="780" y="78">mit</text>
-  <text class="word-fill" id="f5" x="880" y="78">AI</text>
-  <!-- Pen dot -->
-  <circle id="pen" r="5" fill="#000" opacity="0"/>
-  <!-- Underline under AI -->
-  <line id="underline" x1="878" y1="92" x2="960" y2="92" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-dasharray="82" stroke-dashoffset="82"/>
+<svg viewBox="0 0 762 92" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ===== Mache ===== -->
+  <!-- M -->
+  <path class="s" d="M 15,65 L 19,18 L 35,50 L 51,18 L 55,65"/>
+  <!-- a -->
+  <path class="s" d="M 82,38 C 82,28 60,28 60,50 C 60,66 82,66 82,48 L 82,65"/>
+  <!-- c -->
+  <path class="s" d="M 109,38 C 101,28 89,34 89,50 C 89,64 99,70 109,64"/>
+  <!-- h stroke1: stem -->
+  <path class="s" d="M 114,18 L 114,65"/>
+  <!-- h stroke2: arch -->
+  <path class="s" d="M 114,42 C 120,34 132,34 138,42 L 138,65"/>
+  <!-- e -->
+  <path class="s" d="M 143,50 L 163,50 C 165,34 143,30 143,50 C 143,66 157,70 165,62"/>
+
+  <!-- ===== dein ===== word pause -->
+  <!-- d stroke1: bowl -->
+  <path class="s wp" d="M 222,42 C 218,30 200,30 200,50 C 200,66 216,68 222,52"/>
+  <!-- d stroke2: stem -->
+  <path class="s" d="M 222,18 L 222,65"/>
+  <!-- e -->
+  <path class="s" d="M 229,50 L 249,50 C 251,34 229,30 229,50 C 229,66 243,70 251,62"/>
+  <!-- i stem -->
+  <path class="s" d="M 259,36 L 259,65"/>
+  <!-- i dot -->
+  <path class="dot" d="M 259,24 L 259,25"/>
+  <!-- n stroke1: stem -->
+  <path class="s" d="M 267,36 L 267,65"/>
+  <!-- n stroke2: arch -->
+  <path class="s" d="M 267,42 C 273,32 285,32 291,42 L 291,65"/>
+
+  <!-- ===== Marketing ===== word pause -->
+  <!-- M -->
+  <path class="s wp" d="M 326,65 L 330,18 L 346,50 L 362,18 L 366,65"/>
+  <!-- a -->
+  <path class="s" d="M 393,38 C 393,28 371,28 371,50 C 371,66 393,66 393,48 L 393,65"/>
+  <!-- r stroke1: stem -->
+  <path class="s" d="M 400,36 L 400,65"/>
+  <!-- r stroke2: hook -->
+  <path class="s" d="M 400,44 C 404,34 414,34 416,40"/>
+  <!-- k stroke1: stem -->
+  <path class="s" d="M 421,18 L 421,65"/>
+  <!-- k stroke2: diagonals -->
+  <path class="s" d="M 443,36 L 421,52 L 443,65"/>
+  <!-- e -->
+  <path class="s" d="M 448,50 L 468,50 C 470,34 448,30 448,50 C 448,66 462,70 470,62"/>
+  <!-- t stroke1: stem -->
+  <path class="s" d="M 483,22 L 483,65"/>
+  <!-- t stroke2: cross -->
+  <path class="s" d="M 475,36 L 491,36"/>
+  <!-- i stem -->
+  <path class="s" d="M 499,36 L 499,65"/>
+  <!-- i dot -->
+  <path class="dot" d="M 499,24 L 499,25"/>
+  <!-- n stroke1: stem -->
+  <path class="s" d="M 507,36 L 507,65"/>
+  <!-- n stroke2: arch -->
+  <path class="s" d="M 507,42 C 513,32 525,32 531,42 L 531,65"/>
+  <!-- g stroke1: bowl -->
+  <path class="s" d="M 558,40 C 558,28 536,28 536,50 C 536,66 558,66 558,48"/>
+  <!-- g stroke2: descender -->
+  <path class="s" d="M 558,36 L 558,82 C 558,88 540,86 536,80"/>
+
+  <!-- ===== mit ===== word pause -->
+  <!-- m stroke1: stem -->
+  <path class="s wp" d="M 595,36 L 595,65"/>
+  <!-- m stroke2: arch1 -->
+  <path class="s" d="M 595,42 C 600,32 609,32 614,42 L 614,65"/>
+  <!-- m stroke3: arch2 -->
+  <path class="s" d="M 614,42 C 619,32 628,32 633,42 L 633,65"/>
+  <!-- i stem -->
+  <path class="s" d="M 641,36 L 641,65"/>
+  <!-- i dot -->
+  <path class="dot" d="M 641,24 L 641,25"/>
+  <!-- t stroke1: stem -->
+  <path class="s" d="M 657,22 L 657,65"/>
+  <!-- t stroke2: cross -->
+  <path class="s" d="M 649,36 L 665,36"/>
+
+  <!-- ===== AI ===== word pause -->
+  <!-- A stroke1: legs -->
+  <path class="s wp" d="M 700,65 L 718,18 L 736,65"/>
+  <!-- A stroke2: crossbar -->
+  <path class="s" d="M 708,46 L 728,46"/>
+  <!-- I -->
+  <path class="s" d="M 744,18 L 744,65"/>
+
+  <!-- Pen cursor -->
+  <circle id="pen" r="4"/>
 </svg>
 
 <script>
-document.fonts.ready.then(()=>{
-  const words=[
-    {stroke:'t1',fill:'f1',dur:0.6, delay:0.15},
-    {stroke:'t2',fill:'f2',dur:0.45,delay:0.12},
-    {stroke:'t3',fill:'f3',dur:0.9, delay:0.1},
-    {stroke:'t4',fill:'f4',dur:0.35,delay:0.12},
-    {stroke:'t5',fill:'f5',dur:0.5, delay:0.1},
-  ];
-
-  // Measure & set up stroke-dasharray for each word
-  words.forEach(w=>{
-    const el=document.getElementById(w.stroke);
-    const len=el.getComputedTextLength()*3.2; // multiplier for stroke detail
-    el.style.strokeDasharray=len;
-    el.style.strokeDashoffset=len;
-    w.len=len;
-    w.el=el;
-    w.fillEl=document.getElementById(w.fill);
-  });
-
+(()=>{
+  const paths=[...document.querySelectorAll('.s,.dot')];
   const pen=document.getElementById('pen');
-  const underline=document.getElementById('underline');
-  let time=0;
+  const SPEED=280; // px per second — leisurely handwriting
+  const STROKE_GAP=40; // ms between strokes of same letter
+  const WORD_GAP=220; // ms pause between words
 
-  // Animate each word sequentially
-  words.forEach((w,i)=>{
-    const start=time;
-    // Stroke draw animation
-    w.el.style.transition=`stroke-dashoffset ${w.dur}s cubic-bezier(.45,.05,.55,.95) ${start}s`;
-    // Fill fade-in after stroke completes
-    w.fillEl.style.transition=`opacity 0.25s ease ${start+w.dur*0.7}s`;
-
-    setTimeout(()=>{
-      w.el.style.strokeDashoffset='0';
-      w.fillEl.style.opacity='1';
-    },50);
-
-    // Move pen dot along the text during writing
-    const bbox=w.el.getBBox();
-    const penStart=start*1000;
-    const penDur=w.dur*1000;
-    animatePen(pen, bbox, penStart, penDur);
-
-    time+=w.dur+w.delay;
+  // Measure all paths, keep fully hidden
+  paths.forEach(p=>{
+    const len=p.getTotalLength();
+    p._len=len;
+    p.style.strokeDasharray=len;
+    p.style.strokeDashoffset=len;
   });
 
-  // Underline after AI
-  const ulStart=time-0.05;
-  underline.style.transition=`stroke-dashoffset 0.25s ease ${ulStart}s`;
-  setTimeout(()=>underline.style.strokeDashoffset='0',50);
+  // Schedule each path individually via setTimeout
+  let t=300;
+  const schedule=[];
 
-  // Fade out pen after done
-  const totalEnd=(time+0.3)*1000;
-  setTimeout(()=>{pen.style.transition='opacity 0.3s';pen.style.opacity='0'},totalEnd);
+  paths.forEach(p=>{
+    const len=p._len;
+    const dur=Math.max(80,(len/SPEED)*1000);
+    if(p.classList.contains('wp')) t+=WORD_GAP;
 
-  function animatePen(dot, bbox, startMs, durMs){
-    const x0=bbox.x;
-    const x1=bbox.x+bbox.width;
-    const y=bbox.y+bbox.height*0.5;
-    const frames=Math.ceil(durMs/16);
-    let frame=0;
-    const t0=performance.now()+startMs+50;
+    schedule.push({el:p,start:t,dur:dur,len:len});
 
-    function tick(now){
-      if(now<t0){requestAnimationFrame(tick);return}
-      const elapsed=now-t0;
-      const p=Math.min(elapsed/durMs,1);
-      // Eased progress
-      const ep=p<0.5?2*p*p:(1-Math.pow(-2*p+2,2)/2);
-      const cx=x0+(x1-x0)*ep;
-      // Slight vertical wobble for hand feel
-      const wobble=Math.sin(p*Math.PI*6)*1.5;
-      dot.setAttribute('cx',cx);
-      dot.setAttribute('cy',y+wobble);
-      dot.style.opacity='1';
-      if(p<1)requestAnimationFrame(tick);
+    // Reveal + animate at the right moment
+    const startT=t, durT=dur;
+    setTimeout(()=>{
+      p.style.opacity='1';
+      p.style.transition=`stroke-dashoffset ${durT}ms cubic-bezier(.4,0,.2,1)`;
+      // Force layout before changing offset
+      p.getBoundingClientRect();
+      p.style.strokeDashoffset='0';
+    },startT);
+
+    t+=dur+STROKE_GAP;
+  });
+
+  const totalEnd=t;
+
+  // Pen cursor follows the drawing tip
+  const t0=performance.now()+300;
+
+  function movePen(now){
+    const elapsed=now-t0;
+    if(elapsed>totalEnd){
+      pen.style.transition='opacity 0.4s';
+      pen.style.opacity='0';
+      return;
     }
-    requestAnimationFrame(tick);
+
+    for(let i=schedule.length-1;i>=0;i--){
+      const s=schedule[i];
+      if(elapsed>=s.start && elapsed<=s.start+s.dur){
+        const progress=Math.min(1,(elapsed-s.start)/s.dur);
+        const pt=s.el.getPointAtLength(progress*s.len);
+        pen.setAttribute('cx',pt.x);
+        pen.setAttribute('cy',pt.y);
+        pen.style.opacity='0.6';
+        break;
+      }else if(elapsed>s.start+s.dur){
+        const pt=s.el.getPointAtLength(s.len);
+        pen.setAttribute('cx',pt.x);
+        pen.setAttribute('cy',pt.y);
+        if(i<schedule.length-1 && elapsed<schedule[i+1].start){
+          pen.style.opacity='0.4';
+        }
+        break;
+      }
+    }
+    requestAnimationFrame(movePen);
   }
-});
+  requestAnimationFrame(movePen);
+})();
 </script>
 
 </body>
