@@ -6,125 +6,131 @@
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%;background:transparent;display:flex;align-items:center;justify-content:center;overflow:hidden}
-
-  .text-wrap{position:relative;white-space:nowrap}
-
-  .line{
-    font-family:'Permanent Marker',cursive;
-    font-size:clamp(28px,5vw,56px);
-    color:#000;
-    display:inline-block;
-    position:relative;
-    overflow:hidden;
-    vertical-align:bottom;
-    margin-right:.3em;
-  }
-  .line:last-child{margin-right:0}
-
-  .line span{
-    display:inline-block;
-    transform:translateY(100%) rotate(2deg);
-    opacity:0;
-  }
-
-  /* Wort 1: "Mache" */
-  .w1 span{animation:writeIn .35s cubic-bezier(.22,.68,.36,1) forwards}
-  .w1 .c1{animation-delay:.1s}
-  .w1 .c2{animation-delay:.14s}
-  .w1 .c3{animation-delay:.18s}
-  .w1 .c4{animation-delay:.22s}
-  .w1 .c5{animation-delay:.26s}
-
-  /* Wort 2: "dein" */
-  .w2 span{animation:writeIn .35s cubic-bezier(.22,.68,.36,1) forwards}
-  .w2 .c1{animation-delay:.45s}
-  .w2 .c2{animation-delay:.49s}
-  .w2 .c3{animation-delay:.53s}
-  .w2 .c4{animation-delay:.57s}
-
-  /* Wort 3: "Marketing" */
-  .w3 span{animation:writeIn .35s cubic-bezier(.22,.68,.36,1) forwards}
-  .w3 .c1{animation-delay:.72s}
-  .w3 .c2{animation-delay:.76s}
-  .w3 .c3{animation-delay:.80s}
-  .w3 .c4{animation-delay:.84s}
-  .w3 .c5{animation-delay:.88s}
-  .w3 .c6{animation-delay:.92s}
-  .w3 .c7{animation-delay:.96s}
-  .w3 .c8{animation-delay:1.0s}
-  .w3 .c9{animation-delay:1.04s}
-
-  /* Wort 4: "mit" */
-  .w4 span{animation:writeIn .35s cubic-bezier(.22,.68,.36,1) forwards}
-  .w4 .c1{animation-delay:1.25s}
-  .w4 .c2{animation-delay:1.29s}
-  .w4 .c3{animation-delay:1.33s}
-
-  /* Wort 5: "AI" - etwas dramatischer */
-  .w5 span{animation:writeInBold .5s cubic-bezier(.22,.68,.36,1) forwards}
-  .w5 .c1{animation-delay:1.55s}
-  .w5 .c2{animation-delay:1.65s}
-
-  @keyframes writeIn{
-    0%  {transform:translateY(80%) rotate(3deg) scale(.7);opacity:0}
-    60% {transform:translateY(-8%) rotate(-1deg) scale(1.05);opacity:1}
-    100%{transform:translateY(0) rotate(0) scale(1);opacity:1}
-  }
-
-  @keyframes writeInBold{
-    0%  {transform:translateY(80%) rotate(5deg) scale(.5);opacity:0}
-    50% {transform:translateY(-12%) rotate(-2deg) scale(1.15);opacity:1}
-    75% {transform:translateY(4%) rotate(1deg) scale(1.05);opacity:1}
-    100%{transform:translateY(0) rotate(0) scale(1);opacity:1}
-  }
-
-  /* Unterstrich unter "AI" */
-  .underline{
-    position:absolute;
-    bottom:-4px;
-    left:0;
-    width:100%;
-    height:4px;
-    background:#000;
-    border-radius:2px;
-    transform:scaleX(0);
-    transform-origin:left;
-    animation:drawLine .3s cubic-bezier(.4,0,.2,1) 1.9s forwards;
-  }
-
-  @keyframes drawLine{
-    to{transform:scaleX(1)}
-  }
-
-  /* Cursor/Stift-Effekt */
-  .cursor{
-    display:inline-block;
-    width:3px;
-    height:1.1em;
-    background:#000;
-    margin-left:4px;
-    vertical-align:text-bottom;
-    animation:blink .5s step-end 0s 4, fadeOut .3s 2.2s forwards;
-  }
-  @keyframes blink{
-    50%{opacity:0}
-  }
-  @keyframes fadeOut{
-    to{opacity:0}
-  }
+  html,body{height:100%;background:transparent;display:flex;align-items:center;justify-content:center;overflow:visible}
+  svg{width:90vw;height:auto}
 </style>
 </head>
 <body>
 
-<div class="text-wrap">
-  <span class="line w1"><span class="c1">M</span><span class="c2">a</span><span class="c3">c</span><span class="c4">h</span><span class="c5">e</span></span>
-  <span class="line w2"><span class="c1">d</span><span class="c2">e</span><span class="c3">i</span><span class="c4">n</span></span>
-  <span class="line w3"><span class="c1">M</span><span class="c2">a</span><span class="c3">r</span><span class="c4">k</span><span class="c5">e</span><span class="c6">t</span><span class="c7">i</span><span class="c8">n</span><span class="c9">g</span></span>
-  <span class="line w4"><span class="c1">m</span><span class="c2">i</span><span class="c3">t</span></span>
-  <span class="line w5" style="position:relative"><span class="c1">A</span><span class="c2">I</span><div class="underline"></div></span>
-  <span class="cursor"></span>
-</div>
+<svg id="hw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 120" width="1000" height="120">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+    .word{
+      font-family:'Permanent Marker',cursive;
+      font-size:62px;
+      fill:none;
+      stroke:#000;
+      stroke-width:2.5;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .word-fill{
+      font-family:'Permanent Marker',cursive;
+      font-size:62px;
+      fill:#000;
+      opacity:0;
+    }
+  </style>
+  <!-- Stroke layer (gets drawn) -->
+  <text class="word" id="t1" x="10" y="78">Mache</text>
+  <text class="word" id="t2" x="265" y="78">dein</text>
+  <text class="word" id="t3" x="430" y="78">Marketing</text>
+  <text class="word" id="t4" x="780" y="78">mit</text>
+  <text class="word" id="t5" x="880" y="78">AI</text>
+  <!-- Fill layer (fades in after stroke) -->
+  <text class="word-fill" id="f1" x="10" y="78">Mache</text>
+  <text class="word-fill" id="f2" x="265" y="78">dein</text>
+  <text class="word-fill" id="f3" x="430" y="78">Marketing</text>
+  <text class="word-fill" id="f4" x="780" y="78">mit</text>
+  <text class="word-fill" id="f5" x="880" y="78">AI</text>
+  <!-- Pen dot -->
+  <circle id="pen" r="5" fill="#000" opacity="0"/>
+  <!-- Underline under AI -->
+  <line id="underline" x1="878" y1="92" x2="960" y2="92" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-dasharray="82" stroke-dashoffset="82"/>
+</svg>
+
+<script>
+document.fonts.ready.then(()=>{
+  const words=[
+    {stroke:'t1',fill:'f1',dur:0.6, delay:0.15},
+    {stroke:'t2',fill:'f2',dur:0.45,delay:0.12},
+    {stroke:'t3',fill:'f3',dur:0.9, delay:0.1},
+    {stroke:'t4',fill:'f4',dur:0.35,delay:0.12},
+    {stroke:'t5',fill:'f5',dur:0.5, delay:0.1},
+  ];
+
+  // Measure & set up stroke-dasharray for each word
+  words.forEach(w=>{
+    const el=document.getElementById(w.stroke);
+    const len=el.getComputedTextLength()*3.2; // multiplier for stroke detail
+    el.style.strokeDasharray=len;
+    el.style.strokeDashoffset=len;
+    w.len=len;
+    w.el=el;
+    w.fillEl=document.getElementById(w.fill);
+  });
+
+  const pen=document.getElementById('pen');
+  const underline=document.getElementById('underline');
+  let time=0;
+
+  // Animate each word sequentially
+  words.forEach((w,i)=>{
+    const start=time;
+    // Stroke draw animation
+    w.el.style.transition=`stroke-dashoffset ${w.dur}s cubic-bezier(.45,.05,.55,.95) ${start}s`;
+    // Fill fade-in after stroke completes
+    w.fillEl.style.transition=`opacity 0.25s ease ${start+w.dur*0.7}s`;
+
+    setTimeout(()=>{
+      w.el.style.strokeDashoffset='0';
+      w.fillEl.style.opacity='1';
+    },50);
+
+    // Move pen dot along the text during writing
+    const bbox=w.el.getBBox();
+    const penStart=start*1000;
+    const penDur=w.dur*1000;
+    animatePen(pen, bbox, penStart, penDur);
+
+    time+=w.dur+w.delay;
+  });
+
+  // Underline after AI
+  const ulStart=time-0.05;
+  underline.style.transition=`stroke-dashoffset 0.25s ease ${ulStart}s`;
+  setTimeout(()=>underline.style.strokeDashoffset='0',50);
+
+  // Fade out pen after done
+  const totalEnd=(time+0.3)*1000;
+  setTimeout(()=>{pen.style.transition='opacity 0.3s';pen.style.opacity='0'},totalEnd);
+
+  function animatePen(dot, bbox, startMs, durMs){
+    const x0=bbox.x;
+    const x1=bbox.x+bbox.width;
+    const y=bbox.y+bbox.height*0.5;
+    const frames=Math.ceil(durMs/16);
+    let frame=0;
+    const t0=performance.now()+startMs+50;
+
+    function tick(now){
+      if(now<t0){requestAnimationFrame(tick);return}
+      const elapsed=now-t0;
+      const p=Math.min(elapsed/durMs,1);
+      // Eased progress
+      const ep=p<0.5?2*p*p:(1-Math.pow(-2*p+2,2)/2);
+      const cx=x0+(x1-x0)*ep;
+      // Slight vertical wobble for hand feel
+      const wobble=Math.sin(p*Math.PI*6)*1.5;
+      dot.setAttribute('cx',cx);
+      dot.setAttribute('cy',y+wobble);
+      dot.style.opacity='1';
+      if(p<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+});
+</script>
 
 </body>
 </html>
